@@ -15,6 +15,7 @@ const navLinks = [
   { href: "/stats", label: "Stats" },
   { href: "/country-dashboard", label: "Dashboard" },
   { href: "/severity-calc", label: "Calculator" },
+  { href: "/protest-calc", label: "Protest Calc" },
   { href: "/search", label: "Search" },
   { href: "/learn", label: "Learn" },
   { href: "/about", label: "About" },

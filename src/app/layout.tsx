@@ -63,6 +63,9 @@ export default function RootLayout({
               <a href="/severity-calc" className="text-xs text-[var(--color-text-muted)] transition-colors hover:text-[var(--color-text)]">
                 Calculator
               </a>
+              <a href="/protest-calc" className="text-xs text-[var(--color-text-muted)] transition-colors hover:text-[var(--color-text)]">
+                Protest Calc
+              </a>
               <div className="h-3 w-px bg-[var(--color-border)]" />
               <a href="/search" className="text-xs text-[var(--color-text-muted)] transition-colors hover:text-[var(--color-text)]">
                 Search
