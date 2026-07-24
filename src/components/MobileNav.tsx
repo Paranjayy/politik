@@ -22,6 +22,8 @@ const navLinks = [
   { href: "/glossary", label: "Glossary" },
   { href: "/about", label: "About" },
   { href: "/export", label: "Export" },
+  { href: "/api-docs", label: "API Docs" },
+  { href: "/changelog", label: "Changelog" },
 ];
 
 export function MobileNav() {

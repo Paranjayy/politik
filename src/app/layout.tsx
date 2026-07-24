@@ -86,6 +86,13 @@ export default function RootLayout({
               <a href="/export" className="text-xs text-[var(--color-text-muted)] transition-colors hover:text-[var(--color-text)]">
                 Export
               </a>
+              <div className="h-3 w-px bg-[var(--color-border)]" />
+              <a href="/api-docs" className="text-xs text-[var(--color-text-muted)] transition-colors hover:text-[var(--color-text)]">
+                API
+              </a>
+              <a href="/changelog" className="text-xs text-[var(--color-text-muted)] transition-colors hover:text-[var(--color-text)]">
+                Changelog
+              </a>
             </div>
             <MobileNav />
           </div>
