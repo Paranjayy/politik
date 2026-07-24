@@ -2,49 +2,46 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Politik — Civic Intelligence Platform",
+  title: "Politik - Civic Intelligence Platform",
   description: "Structured public issue tracking and government observatory",
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en">
       <body>
-        <nav className="fixed top-0 left-0 right-0 z-50 border-b border-[#27272a] bg-[#0a0a0b]/80 backdrop-blur-xl">
-          <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-            <a href="/" className="flex items-center gap-3">
-              <div className="flex h-8 w-8 items-center justify-center rounded bg-[#ef4444] text-sm font-bold text-white">
+        <nav className="fixed top-0 left-0 right-0 z-50 border-b border-[var(--color-border)] bg-[var(--color-bg)]/90 backdrop-blur-xl">
+          <div className="mx-auto flex max-w-[1400px] items-center justify-between px-6 h-14">
+            <a href="/" className="flex items-center gap-2.5">
+              <div className="flex h-6 w-6 items-center justify-center rounded bg-[var(--color-accent)] text-[10px] font-bold text-white font-[family-name:var(--font-mono)]">
                 P
               </div>
-              <span className="text-lg font-semibold tracking-tight">
+              <span className="text-sm font-semibold tracking-tight text-[var(--color-text)]">
                 politik
               </span>
+              <span className="text-[10px] font-[family-name:var(--font-mono)] text-[var(--color-text-muted)] ml-1">
+                v0.1
+              </span>
             </a>
-            <div className="flex items-center gap-8">
-              <a
-                href="/civic-ledger"
-                className="text-sm text-[#a1a1aa] transition-colors hover:text-white"
-              >
-                Civic Ledger
+            <div className="flex items-center gap-6">
+              <a href="/civic-ledger" className="text-xs text-[var(--color-text-muted)] transition-colors hover:text-[var(--color-text)]">
+                Issues
               </a>
-              <a
-                href="/civic-intel"
-                className="text-sm text-[#a1a1aa] transition-colors hover:text-white"
-              >
-                Civic Intel
+              <a href="/civic-intel" className="text-xs text-[var(--color-text-muted)] transition-colors hover:text-[var(--color-text)]">
+                Intel
               </a>
-              <div className="h-4 w-px bg-[#27272a]" />
-              <span className="text-xs text-[#71717a]">
-                v0.1 — open civic infrastructure
+              <div className="h-3 w-px bg-[var(--color-border)]" />
+              <span className="text-[10px] font-[family-name:var(--font-mono)] text-[var(--color-text-muted)]">
+                open civic infra
               </span>
             </div>
           </div>
         </nav>
-        <main className="pt-16">{children}</main>
+        <main className="pt-14">{children}</main>
       </body>
     </html>
   );

@@ -18,7 +18,6 @@ import {
   Users,
   MapPin,
   Calendar,
-  ExternalLink,
 } from "lucide-react";
 
 const trendIcon: Record<string, React.ReactNode> = {
@@ -45,22 +44,26 @@ function DimensionSection({
   data: { metric: string; value: string; trend: string; confidence: string }[];
 }) {
   return (
-    <div className="rounded-xl border border-[#27272a] bg-[#18181b] p-6">
-      <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-[#71717a]">
+    <section>
+      <h2 className="mb-3 text-[10px] font-[family-name:var(--font-mono)] uppercase tracking-widest text-[var(--color-text-muted)]">
         {title}
-      </h3>
-      <div className="space-y-3">
+      </h2>
+      <div className="divide-y divide-[var(--color-border)] border border-[var(--color-border)]">
         {data.map((d) => (
           <div
             key={d.metric}
-            className="flex items-center justify-between rounded-lg bg-[#0a0a0b] px-4 py-3"
+            className="flex items-center justify-between px-4 py-3 transition-colors hover:bg-[var(--color-bg-raised)]"
           >
-            <span className="text-sm text-[#d4d4d8]">{d.metric}</span>
+            <span className="text-xs text-[var(--color-text-secondary)]">
+              {d.metric}
+            </span>
             <div className="flex items-center gap-3">
-              <span className="text-sm font-medium text-white">{d.value}</span>
+              <span className="text-xs font-medium text-[var(--color-text)]">
+                {d.value}
+              </span>
               {trendIcon[d.trend]}
               <span
-                className="rounded px-1.5 py-0.5 text-[10px]"
+                className="rounded px-1.5 py-0.5 text-[9px] font-[family-name:var(--font-mono)]"
                 style={{
                   color: trendColor[d.trend],
                   background: `${trendColor[d.trend]}15`,
@@ -69,7 +72,7 @@ function DimensionSection({
                 {d.trend}
               </span>
               <span
-                className="text-[10px]"
+                className="text-[9px] font-[family-name:var(--font-mono)]"
                 style={{
                   color:
                     d.confidence === "high"
@@ -85,7 +88,7 @@ function DimensionSection({
           </div>
         ))}
       </div>
-    </div>
+    </section>
   );
 }
 
@@ -97,45 +100,70 @@ function CountryDetail({
   onBack: () => void;
 }) {
   return (
-    <div className="min-h-screen pt-20">
-      <div className="mx-auto max-w-5xl px-6 py-8">
+    <div className="min-h-screen border-b border-[var(--color-border)]">
+      <div className="mx-auto max-w-[1400px] px-6 py-8">
         <button
           onClick={onBack}
-          className="mb-6 flex items-center gap-1.5 text-sm text-[#71717a] transition-colors hover:text-white"
+          className="mb-6 flex items-center gap-1.5 text-xs text-[var(--color-text-muted)] transition-colors hover:text-[var(--color-text)]"
         >
-          <ArrowLeft className="h-3.5 w-3.5" />
-          Back to countries
+          <ArrowLeft className="h-3 w-3" />
+          All countries
         </button>
 
-        {/* Header */}
-        <div className="mb-8">
-          <div className="mb-3 flex items-center gap-3">
-            <span className="text-4xl">{country.flag}</span>
-            <div>
-              <h1 className="text-3xl font-bold tracking-tight">
-                {country.name}
-              </h1>
-              <div className="flex items-center gap-3 text-sm text-[#a1a1aa]">
-                <span>{country.governmentType}</span>
-                <span>·</span>
-                <span>{country.population}</span>
+        {/* Header - asymmetric */}
+        <div className="mb-8 grid gap-8 lg:grid-cols-[1fr_320px]">
+          <div>
+            <div className="mb-3 flex items-center gap-3">
+              <span className="text-3xl">{country.flag}</span>
+              <div>
+                <h1 className="text-2xl font-bold tracking-tight lg:text-3xl">
+                  {country.name}
+                </h1>
+                <div className="flex items-center gap-3 text-xs text-[var(--color-text-muted)]">
+                  <span>{country.governmentType}</span>
+                  <span className="text-[var(--color-border)]">·</span>
+                  <span>{country.population}</span>
+                </div>
               </div>
             </div>
+            <div className="flex items-center gap-2">
+              <span
+                className="rounded px-2 py-0.5 text-[10px] font-medium font-[family-name:var(--font-mono)]"
+                style={{
+                  color: trendColor[country.historicalTrajectory],
+                  background: `${trendColor[country.historicalTrajectory]}15`,
+                }}
+              >
+                Historical trajectory: {country.historicalTrajectory}
+              </span>
+            </div>
           </div>
-          <div className="flex items-center gap-2">
-            <span
-              className="rounded px-2 py-0.5 text-xs font-medium"
-              style={{
-                color: trendColor[country.historicalTrajectory],
-                background: `${trendColor[country.historicalTrajectory]}15`,
-              }}
-            >
-              Historical trajectory: {country.historicalTrajectory}
-            </span>
+
+          {/* Quick stats sidebar */}
+          <div className="flex flex-col gap-px rounded border border-[var(--color-border)] bg-[var(--color-border)]">
+            {[
+              { label: "Capital", value: country.capital },
+              { label: "Last election", value: country.lastElection },
+              { label: "Population", value: country.population },
+              { label: "Dimensions", value: "7 categories" },
+            ].map((s) => (
+              <div
+                key={s.label}
+                className="flex items-center justify-between bg-[var(--color-bg-raised)] px-4 py-3"
+              >
+                <span className="text-[10px] text-[var(--color-text-muted)]">
+                  {s.label}
+                </span>
+                <span className="text-xs font-medium text-[var(--color-text)]">
+                  {s.value}
+                </span>
+              </div>
+            ))}
           </div>
         </div>
 
-        <div className="space-y-6">
+        {/* Dimensions */}
+        <div className="space-y-8">
           <DimensionSection
             title="A. Human Outcomes"
             data={country.humanOutcomes}
@@ -178,136 +206,166 @@ function PartyDetail({
   onBack: () => void;
 }) {
   return (
-    <div className="min-h-screen pt-20">
-      <div className="mx-auto max-w-5xl px-6 py-8">
+    <div className="min-h-screen border-b border-[var(--color-border)]">
+      <div className="mx-auto max-w-[1400px] px-6 py-8">
         <button
           onClick={onBack}
-          className="mb-6 flex items-center gap-1.5 text-sm text-[#71717a] transition-colors hover:text-white"
+          className="mb-6 flex items-center gap-1.5 text-xs text-[var(--color-text-muted)] transition-colors hover:text-[var(--color-text)]"
         >
-          <ArrowLeft className="h-3.5 w-3.5" />
-          Back to parties
+          <ArrowLeft className="h-3 w-3" />
+          All parties
         </button>
 
-        <div className="mb-8">
-          <div className="mb-2 flex items-center gap-3">
-            <h1 className="text-3xl font-bold tracking-tight">{party.name}</h1>
-            <span className="rounded bg-[#ef4444]/10 px-2 py-0.5 text-xs font-medium text-[#ef4444]">
-              {party.shortName}
-            </span>
-          </div>
-          <div className="flex items-center gap-3 text-sm text-[#a1a1aa]">
-            <span>Founded {party.founded}</span>
-            <span>·</span>
-            <span>{party.country}</span>
-            {party.currentSeats && (
-              <>
-                <span>·</span>
-                <span>
-                  {party.currentSeats}/{party.totalSeats} seats ({party.voteShare})
-                </span>
-              </>
-            )}
-          </div>
-          <div className="mt-2 flex flex-wrap gap-1.5">
-            {party.ideology.map((i) => (
-              <span
-                key={i}
-                className="rounded-md bg-[#27272a] px-2 py-0.5 text-[10px] text-[#a1a1aa]"
-              >
-                {i}
+        {/* Header - asymmetric */}
+        <div className="mb-8 grid gap-8 lg:grid-cols-[1fr_320px]">
+          <div>
+            <div className="mb-2 flex items-center gap-3">
+              <h1 className="text-2xl font-bold tracking-tight lg:text-3xl">
+                {party.name}
+              </h1>
+              <span className="rounded bg-[var(--color-accent)]/10 px-2 py-0.5 text-[10px] font-medium font-[family-name:var(--font-mono)] text-[var(--color-accent)]">
+                {party.shortName}
               </span>
+            </div>
+            <div className="flex flex-wrap items-center gap-3 text-xs text-[var(--color-text-muted)]">
+              <span>Founded {party.founded}</span>
+              <span className="text-[var(--color-border)]">·</span>
+              <span>{party.country}</span>
+              {party.currentSeats && (
+                <>
+                  <span className="text-[var(--color-border)]">·</span>
+                  <span>
+                    {party.currentSeats}/{party.totalSeats} seats ({party.voteShare})
+                  </span>
+                </>
+              )}
+            </div>
+            <div className="mt-3 flex flex-wrap gap-1.5">
+              {party.ideology.map((i) => (
+                <span
+                  key={i}
+                  className="rounded bg-[var(--color-border)] px-2 py-0.5 text-[10px] text-[var(--color-text-muted)]"
+                >
+                  {i}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          {/* Quick stats */}
+          <div className="flex flex-col gap-px rounded border border-[var(--color-border)] bg-[var(--color-border)]">
+            {[
+              { label: "Leadership", value: party.leadership },
+              { label: "Governance", value: party.governancePeriods.join(", ") },
+              {
+                label: "Internal democracy",
+                value: party.internalDemocracy,
+                color:
+                  party.internalDemocracy === "high"
+                    ? "#22c55e"
+                    : party.internalDemocracy === "medium"
+                      ? "#f59e0b"
+                      : "#ef4444",
+              },
+              {
+                label: "Transparency",
+                value: party.transparency,
+                color:
+                  party.transparency === "high"
+                    ? "#22c55e"
+                    : party.transparency === "medium"
+                      ? "#f59e0b"
+                      : "#ef4444",
+              },
+            ].map((s) => (
+              <div
+                key={s.label}
+                className="flex items-center justify-between bg-[var(--color-bg-raised)] px-4 py-3"
+              >
+                <span className="text-[10px] text-[var(--color-text-muted)]">
+                  {s.label}
+                </span>
+                <span
+                  className="text-xs font-medium"
+                  style={{ color: s.color || "var(--color-text)" }}
+                >
+                  {s.value}
+                </span>
+              </div>
             ))}
           </div>
         </div>
 
-        <div className="grid gap-6 lg:grid-cols-2">
-          {/* Key policies */}
-          <section className="rounded-xl border border-[#27272a] bg-[#18181b] p-6">
-            <h2 className="mb-4 text-sm font-semibold uppercase tracking-wider text-[#71717a]">
-              Key Policies
-            </h2>
-            <div className="space-y-2">
-              {party.keyPolicies.map((p, i) => (
-                <div
-                  key={i}
-                  className="flex items-start gap-2 rounded bg-[#0a0a0b] px-3 py-2"
-                >
-                  <span className="mt-0.5 text-[10px] text-[#71717a]">
-                    {i + 1}.
-                  </span>
-                  <span className="text-sm text-[#d4d4d8]">{p}</span>
-                </div>
-              ))}
-            </div>
-          </section>
+        <div className="grid gap-8 lg:grid-cols-[1fr_360px]">
+          {/* Main content */}
+          <div className="space-y-8">
+            {/* Key policies */}
+            <section>
+              <h2 className="mb-3 text-[10px] font-[family-name:var(--font-mono)] uppercase tracking-widest text-[var(--color-text-muted)]">
+                Key Policies
+              </h2>
+              <div className="divide-y divide-[var(--color-border)] border border-[var(--color-border)]">
+                {party.keyPolicies.map((p, i) => (
+                  <div
+                    key={i}
+                    className="flex items-start gap-3 px-4 py-3 transition-colors hover:bg-[var(--color-bg-raised)]"
+                  >
+                    <span className="mt-0.5 font-[family-name:var(--font-mono)] text-[10px] text-[var(--color-text-muted)]">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <span className="text-xs text-[var(--color-text-secondary)]">
+                      {p}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </section>
 
-          {/* Governance */}
-          <section className="rounded-xl border border-[#27272a] bg-[#18181b] p-6">
-            <h2 className="mb-4 text-sm font-semibold uppercase tracking-wider text-[#71717a]">
-              Governance Record
-            </h2>
-            <div className="space-y-2 text-sm">
-              <div className="flex justify-between">
-                <span className="text-[#71717a]">Periods in office</span>
-                <span className="text-[#d4d4d8]">
-                  {party.governancePeriods.join(", ")}
-                </span>
+            {/* Governance record */}
+            <section>
+              <h2 className="mb-3 text-[10px] font-[family-name:var(--font-mono)] uppercase tracking-widest text-[var(--color-text-muted)]">
+                Governance Record
+              </h2>
+              <div className="divide-y divide-[var(--color-border)] border border-[var(--color-border)]">
+                {[
+                  { label: "Periods in office", value: party.governancePeriods.join(", ") },
+                  { label: "Leadership", value: party.leadership },
+                ].map((s) => (
+                  <div
+                    key={s.label}
+                    className="flex items-center justify-between px-4 py-3"
+                  >
+                    <span className="text-[10px] text-[var(--color-text-muted)]">
+                      {s.label}
+                    </span>
+                    <span className="text-xs text-[var(--color-text-secondary)]">
+                      {s.value}
+                    </span>
+                  </div>
+                ))}
               </div>
-              <div className="flex justify-between">
-                <span className="text-[#71717a]">Leadership</span>
-                <span className="text-[#d4d4d8]">{party.leadership}</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-[#71717a]">Internal democracy</span>
-                <span
-                  className="font-medium"
-                  style={{
-                    color:
-                      party.internalDemocracy === "high"
-                        ? "#22c55e"
-                        : party.internalDemocracy === "medium"
-                          ? "#f59e0b"
-                          : "#ef4444",
-                  }}
-                >
-                  {party.internalDemocracy}
-                </span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-[#71717a]">Transparency</span>
-                <span
-                  className="font-medium"
-                  style={{
-                    color:
-                      party.transparency === "high"
-                        ? "#22c55e"
-                        : party.transparency === "medium"
-                          ? "#f59e0b"
-                          : "#ef4444",
-                  }}
-                >
-                  {party.transparency}
-                </span>
-              </div>
-            </div>
-          </section>
+            </section>
+          </div>
 
-          {/* Contradictions */}
-          <section className="rounded-xl border border-[#27272a] bg-[#18181b] p-6 lg:col-span-2">
-            <h2 className="mb-4 text-sm font-semibold uppercase tracking-wider text-[#ef4444]">
-              Contradictions
-            </h2>
-            <div className="grid gap-3 sm:grid-cols-2">
-              {party.contradictions.map((c, i) => (
-                <div
-                  key={i}
-                  className="rounded-lg border border-[#27272a] bg-[#0a0a0b] p-4"
-                >
-                  <p className="text-sm text-[#a1a1aa]">{c}</p>
-                </div>
-              ))}
-            </div>
-          </section>
+          {/* Sidebar */}
+          <div className="space-y-8">
+            {/* Contradictions */}
+            <section>
+              <h2 className="mb-4 text-[10px] font-[family-name:var(--font-mono)] uppercase tracking-widest text-[var(--color-accent)]">
+                Contradictions
+              </h2>
+              <div className="space-y-2">
+                {party.contradictions.map((c, i) => (
+                  <div
+                    key={i}
+                    className="border-l-2 border-[var(--color-accent)] pl-3 text-xs text-[var(--color-text-secondary)]"
+                  >
+                    {c}
+                  </div>
+                ))}
+              </div>
+            </section>
+          </div>
         </div>
       </div>
     </div>
@@ -322,109 +380,144 @@ function ProtestDetail({
   onBack: () => void;
 }) {
   return (
-    <div className="min-h-screen pt-20">
-      <div className="mx-auto max-w-5xl px-6 py-8">
+    <div className="min-h-screen border-b border-[var(--color-border)]">
+      <div className="mx-auto max-w-[1400px] px-6 py-8">
         <button
           onClick={onBack}
-          className="mb-6 flex items-center gap-1.5 text-sm text-[#71717a] transition-colors hover:text-white"
+          className="mb-6 flex items-center gap-1.5 text-xs text-[var(--color-text-muted)] transition-colors hover:text-[var(--color-text)]"
         >
-          <ArrowLeft className="h-3.5 w-3.5" />
-          Back to protests
+          <ArrowLeft className="h-3 w-3" />
+          All protests
         </button>
 
-        <div className="mb-8">
-          <h1 className="mb-3 text-3xl font-bold tracking-tight">
-            {protest.name}
-          </h1>
-          <div className="flex flex-wrap items-center gap-4 text-sm text-[#a1a1aa]">
-            <span className="flex items-center gap-1.5">
-              <MapPin className="h-3.5 w-3.5" />
-              {protest.location}
-            </span>
-            <span className="flex items-center gap-1.5">
-              <Calendar className="h-3.5 w-3.5" />
-              {protest.startDate} — {protest.endDate || "ongoing"}
-            </span>
-            <span className="flex items-center gap-1.5">
-              <Users className="h-3.5 w-3.5" />
-              {protest.participantEstimate}
-            </span>
+        {/* Header - asymmetric */}
+        <div className="mb-8 grid gap-8 lg:grid-cols-[1fr_320px]">
+          <div>
+            <h1 className="mb-3 text-2xl font-bold tracking-tight lg:text-3xl">
+              {protest.name}
+            </h1>
+            <div className="flex flex-wrap items-center gap-4 text-xs text-[var(--color-text-muted)]">
+              <span className="flex items-center gap-1.5">
+                <MapPin className="h-3 w-3" />
+                {protest.location}
+              </span>
+              <span className="flex items-center gap-1.5">
+                <Calendar className="h-3 w-3" />
+                {protest.startDate} — {protest.endDate || "ongoing"}
+              </span>
+              <span className="flex items-center gap-1.5">
+                <Users className="h-3 w-3" />
+                {protest.participantEstimate}
+              </span>
+            </div>
+          </div>
+
+          {/* Quick stats */}
+          <div className="flex flex-col gap-px rounded border border-[var(--color-border)] bg-[var(--color-border)]">
+            {[
+              { label: "Country", value: protest.country },
+              { label: "Participants", value: protest.participantEstimate },
+              { label: "Organizers", value: protest.organizers.join(", ") },
+              {
+                label: "Duration",
+                value: protest.endDate
+                  ? `${protest.startDate} — ${protest.endDate}`
+                  : `${protest.startDate} — ongoing`,
+              },
+            ].map((s) => (
+              <div
+                key={s.label}
+                className="flex items-center justify-between bg-[var(--color-bg-raised)] px-4 py-3"
+              >
+                <span className="text-[10px] text-[var(--color-text-muted)]">
+                  {s.label}
+                </span>
+                <span className="text-xs font-medium text-[var(--color-text)]">
+                  {s.value}
+                </span>
+              </div>
+            ))}
           </div>
         </div>
 
-        <div className="grid gap-6 lg:grid-cols-2">
-          {/* Demands */}
-          <section className="rounded-xl border border-[#27272a] bg-[#18181b] p-6">
-            <h2 className="mb-4 text-sm font-semibold uppercase tracking-wider text-[#ef4444]">
-              Demands
-            </h2>
-            <div className="space-y-2">
-              {protest.demands.map((d, i) => (
-                <div
-                  key={i}
-                  className="flex items-start gap-2 rounded bg-[#0a0a0b] px-3 py-2"
-                >
-                  <span className="mt-0.5 text-[10px] text-[#71717a]">
-                    {i + 1}.
-                  </span>
-                  <span className="text-sm text-[#d4d4d8]">{d}</span>
-                </div>
-              ))}
-            </div>
-          </section>
-
-          {/* State response */}
-          <section className="rounded-xl border border-[#27272a] bg-[#18181b] p-6">
-            <h2 className="mb-4 text-sm font-semibold uppercase tracking-wider text-[#f59e0b]">
-              State Response
-            </h2>
-            <p className="text-sm leading-relaxed text-[#d4d4d8]">
-              {protest.stateResponse}
-            </p>
-          </section>
-
-          {/* Outcome */}
-          <section className="rounded-xl border border-[#27272a] bg-[#18181b] p-6">
-            <h2 className="mb-4 text-sm font-semibold uppercase tracking-wider text-[#22c55e]">
-              Outcome
-            </h2>
-            <p className="text-sm leading-relaxed text-[#d4d4d8]">
-              {protest.outcome}
-            </p>
-          </section>
-
-          {/* Long-term impact */}
-          <section className="rounded-xl border border-[#27272a] bg-[#18181b] p-6">
-            <h2 className="mb-4 text-sm font-semibold uppercase tracking-wider text-[#a855f7]">
-              Long-term Impact
-            </h2>
-            <p className="text-sm leading-relaxed text-[#d4d4d8]">
-              {protest.longTermImpact}
-            </p>
-          </section>
-
-          {/* Timeline */}
-          <section className="rounded-xl border border-[#27272a] bg-[#18181b] p-6 lg:col-span-2">
-            <h2 className="mb-4 text-sm font-semibold uppercase tracking-wider text-[#71717a]">
-              Timeline
-            </h2>
-            <div className="space-y-3">
-              {protest.timeline.map((t, i) => (
-                <div key={i} className="flex gap-4">
-                  <div className="flex flex-col items-center">
-                    <div className="h-2 w-2 rounded-full bg-[#ef4444]" />
-                    {i < protest.timeline.length - 1 && (
-                      <div className="w-px flex-1 bg-[#27272a]" />
-                    )}
+        <div className="grid gap-8 lg:grid-cols-[1fr_360px]">
+          {/* Main content */}
+          <div className="space-y-8">
+            {/* Demands */}
+            <section>
+              <h2 className="mb-3 text-[10px] font-[family-name:var(--font-mono)] uppercase tracking-widest text-[var(--color-accent)]">
+                Demands
+              </h2>
+              <div className="divide-y divide-[var(--color-border)] border border-[var(--color-border)]">
+                {protest.demands.map((d, i) => (
+                  <div
+                    key={i}
+                    className="flex items-start gap-3 px-4 py-3 transition-colors hover:bg-[var(--color-bg-raised)]"
+                  >
+                    <span className="mt-0.5 font-[family-name:var(--font-mono)] text-[10px] text-[var(--color-accent)]">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <span className="text-xs text-[var(--color-text-secondary)]">
+                      {d}
+                    </span>
                   </div>
-                  <div className="pb-4">
-                    <div className="text-xs text-[#71717a]">{t.date}</div>
-                    <div className="text-sm text-[#d4d4d8]">{t.event}</div>
+                ))}
+              </div>
+            </section>
+
+            {/* Timeline */}
+            <section>
+              <h2 className="mb-4 text-[10px] font-[family-name:var(--font-mono)] uppercase tracking-widest text-[var(--color-text-muted)]">
+                Timeline
+              </h2>
+              <div className="relative ml-2 border-l border-[var(--color-border)]">
+                {protest.timeline.map((t, i) => (
+                  <div key={i} className="relative mb-4 pl-6">
+                    <div className="absolute left-0 top-1 h-2 w-2 -translate-x-[calc(50%+0.5px)] rounded-full bg-[var(--color-accent)]" />
+                    <div className="font-[family-name:var(--font-mono)] text-[10px] text-[var(--color-text-muted)]">
+                      {t.date}
+                    </div>
+                    <div className="text-sm text-[var(--color-text-secondary)]">
+                      {t.event}
+                    </div>
                   </div>
-                </div>
-              ))}
-            </div>
-          </section>
+                ))}
+              </div>
+            </section>
+          </div>
+
+          {/* Sidebar */}
+          <div className="space-y-8">
+            {/* State response */}
+            <section>
+              <h2 className="mb-3 text-[10px] font-[family-name:var(--font-mono)] uppercase tracking-widest text-[var(--color-severity-high)]">
+                State Response
+              </h2>
+              <p className="text-xs leading-relaxed text-[var(--color-text-secondary)]">
+                {protest.stateResponse}
+              </p>
+            </section>
+
+            {/* Outcome */}
+            <section>
+              <h2 className="mb-3 text-[10px] font-[family-name:var(--font-mono)] uppercase tracking-widest text-[var(--color-status-verified)]">
+                Outcome
+              </h2>
+              <p className="text-xs leading-relaxed text-[var(--color-text-secondary)]">
+                {protest.outcome}
+              </p>
+            </section>
+
+            {/* Long-term impact */}
+            <section>
+              <h2 className="mb-3 text-[10px] font-[family-name:var(--font-mono)] uppercase tracking-widest text-[var(--color-severity-medium)]">
+                Long-term Impact
+              </h2>
+              <p className="text-xs leading-relaxed text-[var(--color-text-secondary)]">
+                {protest.longTermImpact}
+              </p>
+            </section>
+          </div>
         </div>
       </div>
     </div>
@@ -467,142 +560,158 @@ export default function CivicIntelPage() {
   }
 
   return (
-    <div className="min-h-screen pt-20">
-      <div className="mx-auto max-w-6xl px-6 py-12">
+    <div className="min-h-screen border-b border-[var(--color-border)]">
+      <div className="mx-auto max-w-[1400px] px-6 py-8">
         {/* Header */}
-        <div className="mb-8">
-          <div className="mb-2 flex items-center gap-2">
-            <Globe className="h-5 w-5 text-[#3b82f6]" />
-            <span className="text-xs font-medium uppercase tracking-wider text-[#3b82f6]">
-              Civic Intel
-            </span>
+        <div className="mb-6 flex items-end justify-between">
+          <div>
+            <div className="mb-2 flex items-center gap-2">
+              <Globe className="h-4 w-4 text-[var(--color-severity-medium)]" />
+              <span className="text-[10px] font-[family-name:var(--font-mono)] uppercase tracking-widest text-[var(--color-severity-medium)]">
+                Civic Intel
+              </span>
+            </div>
+            <h1 className="text-2xl font-bold tracking-tight">
+              Government Observatory
+            </h1>
           </div>
-          <h1 className="mb-3 text-3xl font-bold tracking-tight">
-            Government Observatory
-          </h1>
-          <p className="max-w-2xl text-sm text-[#a1a1aa]">
-            Layered country reports, party profiles, and protest tracking.
-            Evidence-linked, multi-dimensional — no single misleading score.
-          </p>
         </div>
 
         {/* Tab bar */}
-        <div className="mb-8 flex gap-1 rounded-lg border border-[#27272a] bg-[#18181b] p-1">
+        <div className="mb-8 flex gap-px rounded border border-[var(--color-border)] bg-[var(--color-border)]">
           {([
-            { key: "countries", label: "Countries", icon: Globe },
-            { key: "parties", label: "Parties", icon: Building2 },
-            { key: "protests", label: "Protests", icon: Megaphone },
+            { key: "countries", label: "Countries", icon: Globe, count: countries.length },
+            { key: "parties", label: "Parties", icon: Building2, count: parties.length },
+            { key: "protests", label: "Protests", icon: Megaphone, count: protests.length },
           ] as const).map((t) => (
             <button
               key={t.key}
               onClick={() => setTab(t.key)}
-              className={`flex items-center gap-2 rounded-md px-4 py-2 text-sm transition-colors ${
+              className={`flex items-center gap-2 px-4 py-2.5 text-xs transition-colors ${
                 tab === t.key
-                  ? "bg-[#3b82f6] text-white"
-                  : "text-[#a1a1aa] hover:bg-[#27272a]"
+                  ? "bg-[var(--color-bg-raised)] text-[var(--color-text)]"
+                  : "bg-[var(--color-bg)] text-[var(--color-text-muted)] hover:text-[var(--color-text)]"
               }`}
             >
-              <t.icon className="h-4 w-4" />
+              <t.icon className="h-3.5 w-3.5" />
               {t.label}
+              <span className="font-[family-name:var(--font-mono)] text-[9px] text-[var(--color-text-muted)]">
+                {t.count}
+              </span>
             </button>
           ))}
         </div>
 
-        {/* Countries */}
+        {/* Countries - data table */}
         {tab === "countries" && (
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {countries.map((c) => (
-              <button
-                key={c.id}
-                onClick={() => setSelectedCountry(c)}
-                className="group rounded-xl border border-[#27272a] bg-[#18181b] p-6 text-left transition-all hover:border-[#3f3f46] hover:bg-[#1f1f23]"
-              >
-                <div className="mb-3 flex items-center gap-3">
-                  <span className="text-3xl">{c.flag}</span>
-                  <div>
-                    <h3 className="font-semibold text-white">{c.name}</h3>
-                    <p className="text-xs text-[#71717a]">
-                      {c.governmentType}
-                    </p>
+          <div>
+            <div className="mb-3 flex items-center justify-between">
+              <span className="text-[10px] font-[family-name:var(--font-mono)] uppercase tracking-widest text-[var(--color-text-muted)]">
+                Country Reports
+              </span>
+              <span className="font-[family-name:var(--font-mono)] text-[10px] text-[var(--color-text-muted)]">
+                {countries.length} countries
+              </span>
+            </div>
+            <div className="divide-y divide-[var(--color-border)] border border-[var(--color-border)]">
+              {countries.map((c) => (
+                <button
+                  key={c.id}
+                  onClick={() => setSelectedCountry(c)}
+                  className="group flex w-full items-center gap-4 py-4 text-left transition-colors hover:bg-[var(--color-bg-raised)] -mx-px px-4"
+                >
+                  <span className="text-2xl">{c.flag}</span>
+                  <div className="min-w-0 flex-1">
+                    <div className="flex items-center gap-2">
+                      <h3 className="text-sm font-medium text-[var(--color-text)] group-hover:text-[var(--color-severity-medium)]">
+                        {c.name}
+                      </h3>
+                      <span
+                        className="rounded px-1.5 py-0.5 text-[9px] font-medium font-[family-name:var(--font-mono)]"
+                        style={{
+                          color: trendColor[c.historicalTrajectory],
+                          background: `${trendColor[c.historicalTrajectory]}15`,
+                        }}
+                      >
+                        {c.historicalTrajectory}
+                      </span>
+                    </div>
+                    <div className="flex flex-wrap items-center gap-3 text-[10px] text-[var(--color-text-muted)]">
+                      <span>{c.governmentType}</span>
+                      <span>{c.population}</span>
+                      <span>Last election: {c.lastElection}</span>
+                    </div>
                   </div>
-                </div>
-                <div className="mb-3 flex items-center gap-2">
-                  <span
-                    className="rounded px-1.5 py-0.5 text-[10px] font-medium"
-                    style={{
-                      color: trendColor[c.historicalTrajectory],
-                      background: `${trendColor[c.historicalTrajectory]}15`,
-                    }}
-                  >
-                    {c.historicalTrajectory}
-                  </span>
-                </div>
-                <div className="space-y-1 text-xs text-[#71717a]">
-                  <div className="flex justify-between">
-                    <span>Population</span>
-                    <span className="text-[#a1a1aa]">{c.population}</span>
+                  <div className="hidden shrink-0 items-center gap-3 sm:flex">
+                    <div className="text-right">
+                      <div className="text-[9px] text-[var(--color-text-muted)]">
+                        Dimensions
+                      </div>
+                      <div className="font-[family-name:var(--font-mono)] text-xs font-medium text-[var(--color-text)]">
+                        7
+                      </div>
+                    </div>
+                    <ChevronRight className="h-4 w-4 text-[var(--color-text-muted)] transition-colors group-hover:text-[var(--color-severity-medium)]" />
                   </div>
-                  <div className="flex justify-between">
-                    <span>Last election</span>
-                    <span className="text-[#a1a1aa]">{c.lastElection}</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span>Dimensions</span>
-                    <span className="text-[#a1a1aa]">7 categories</span>
-                  </div>
-                </div>
-                <div className="mt-3 flex items-center gap-1 text-xs text-[#3b82f6] opacity-0 transition-opacity group-hover:opacity-100">
-                  View report
-                  <ChevronRight className="h-3 w-3" />
-                </div>
-              </button>
-            ))}
+                </button>
+              ))}
+            </div>
           </div>
         )}
 
-        {/* Parties */}
+        {/* Parties - data rows */}
         {tab === "parties" && (
-          <div className="space-y-3">
-            {parties.map((p) => (
-              <button
-                key={p.id}
-                onClick={() => setSelectedParty(p)}
-                className="group w-full rounded-xl border border-[#27272a] bg-[#18181b] p-5 text-left transition-all hover:border-[#3f3f46] hover:bg-[#1f1f23]"
-              >
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-4">
-                    <div>
-                      <div className="flex items-center gap-2">
-                        <h3 className="font-semibold text-white">{p.name}</h3>
-                        <span className="rounded bg-[#ef4444]/10 px-1.5 py-0.5 text-[10px] font-medium text-[#ef4444]">
-                          {p.shortName}
+          <div>
+            <div className="mb-3 flex items-center justify-between">
+              <span className="text-[10px] font-[family-name:var(--font-mono)] uppercase tracking-widest text-[var(--color-text-muted)]">
+                Party Profiles
+              </span>
+              <span className="font-[family-name:var(--font-mono)] text-[10px] text-[var(--color-text-muted)]">
+                {parties.length} parties
+              </span>
+            </div>
+            <div className="divide-y divide-[var(--color-border)] border border-[var(--color-border)]">
+              {parties.map((p) => (
+                <button
+                  key={p.id}
+                  onClick={() => setSelectedParty(p)}
+                  className="group flex w-full items-center gap-4 py-4 text-left transition-colors hover:bg-[var(--color-bg-raised)] -mx-px px-4"
+                >
+                  <div className="min-w-0 flex-1">
+                    <div className="flex items-center gap-2">
+                      <h3 className="text-sm font-medium text-[var(--color-text)] group-hover:text-[var(--color-severity-medium)]">
+                        {p.name}
+                      </h3>
+                      <span className="rounded bg-[var(--color-accent)]/10 px-1.5 py-0.5 text-[9px] font-medium font-[family-name:var(--font-mono)] text-[var(--color-accent)]">
+                        {p.shortName}
+                      </span>
+                    </div>
+                    <div className="flex flex-wrap items-center gap-3 text-[10px] text-[var(--color-text-muted)]">
+                      <span>Founded {p.founded}</span>
+                      {p.currentSeats && (
+                        <span>
+                          {p.currentSeats}/{p.totalSeats} seats ({p.voteShare})
                         </span>
-                      </div>
-                      <div className="mt-1 flex items-center gap-3 text-xs text-[#71717a]">
-                        <span>Founded {p.founded}</span>
-                        {p.currentSeats && (
-                          <span>
-                            {p.currentSeats}/{p.totalSeats} seats ({p.voteShare})
+                      )}
+                      <div className="flex gap-1">
+                        {p.ideology.slice(0, 2).map((i) => (
+                          <span
+                            key={i}
+                            className="rounded bg-[var(--color-border)] px-1.5 py-0.5 text-[9px] text-[var(--color-text-muted)]"
+                          >
+                            {i}
                           </span>
-                        )}
+                        ))}
                       </div>
                     </div>
                   </div>
-                  <div className="flex items-center gap-4">
-                    <div className="flex gap-1.5">
-                      {p.ideology.slice(0, 2).map((i) => (
-                        <span
-                          key={i}
-                          className="rounded bg-[#27272a] px-2 py-0.5 text-[10px] text-[#a1a1aa]"
-                        >
-                          {i}
-                        </span>
-                      ))}
-                    </div>
-                    <div className="flex items-center gap-1 text-xs text-[#71717a]">
-                      <span>Internal democracy:</span>
+                  <div className="hidden shrink-0 items-center gap-4 sm:flex">
+                    <div className="text-right">
+                      <div className="text-[9px] text-[var(--color-text-muted)]">
+                        Democracy
+                      </div>
                       <span
-                        className="font-medium"
+                        className="font-[family-name:var(--font-mono)] text-xs font-medium"
                         style={{
                           color:
                             p.internalDemocracy === "high"
@@ -615,72 +724,105 @@ export default function CivicIntelPage() {
                         {p.internalDemocracy}
                       </span>
                     </div>
-                    <ChevronRight className="h-4 w-4 text-[#71717a] transition-colors group-hover:text-white" />
+                    <div className="text-right">
+                      <div className="text-[9px] text-[var(--color-text-muted)]">
+                        Transparency
+                      </div>
+                      <span
+                        className="font-[family-name:var(--font-mono)] text-xs font-medium"
+                        style={{
+                          color:
+                            p.transparency === "high"
+                              ? "#22c55e"
+                              : p.transparency === "medium"
+                                ? "#f59e0b"
+                                : "#ef4444",
+                        }}
+                      >
+                        {p.transparency}
+                      </span>
+                    </div>
+                    <ChevronRight className="h-4 w-4 text-[var(--color-text-muted)] transition-colors group-hover:text-[var(--color-severity-medium)]" />
                   </div>
-                </div>
-              </button>
-            ))}
+                </button>
+              ))}
+            </div>
           </div>
         )}
 
-        {/* Protests */}
+        {/* Protests - data rows with inline metrics */}
         {tab === "protests" && (
-          <div className="space-y-4">
-            {protests.map((p) => (
-              <button
-                key={p.id}
-                onClick={() => setSelectedProtest(p)}
-                className="group w-full rounded-xl border border-[#27272a] bg-[#18181b] p-6 text-left transition-all hover:border-[#3f3f46] hover:bg-[#1f1f23]"
-              >
-                <div className="mb-3">
-                  <h3 className="text-lg font-semibold text-white">
-                    {p.name}
-                  </h3>
-                  <div className="flex flex-wrap items-center gap-3 text-sm text-[#71717a]">
-                    <span className="flex items-center gap-1">
-                      <MapPin className="h-3 w-3" />
-                      {p.location}
-                    </span>
-                    <span className="flex items-center gap-1">
-                      <Calendar className="h-3 w-3" />
-                      {p.startDate} — {p.endDate || "ongoing"}
-                    </span>
-                    <span className="flex items-center gap-1">
-                      <Users className="h-3 w-3" />
-                      {p.participantEstimate}
-                    </span>
+          <div>
+            <div className="mb-3 flex items-center justify-between">
+              <span className="text-[10px] font-[family-name:var(--font-mono)] uppercase tracking-widest text-[var(--color-text-muted)]">
+                Protest Documentation
+              </span>
+              <span className="font-[family-name:var(--font-mono)] text-[10px] text-[var(--color-text-muted)]">
+                {protests.length} protests
+              </span>
+            </div>
+            <div className="divide-y divide-[var(--color-border)] border border-[var(--color-border)]">
+              {protests.map((p) => (
+                <button
+                  key={p.id}
+                  onClick={() => setSelectedProtest(p)}
+                  className="group flex w-full items-start gap-4 py-4 text-left transition-colors hover:bg-[var(--color-bg-raised)] -mx-px px-4"
+                >
+                  <div className="min-w-0 flex-1">
+                    <div className="mb-1">
+                      <h3 className="text-sm font-medium text-[var(--color-text)] group-hover:text-[var(--color-accent)]">
+                        {p.name}
+                      </h3>
+                    </div>
+                    <div className="flex flex-wrap items-center gap-3 text-[10px] text-[var(--color-text-muted)]">
+                      <span className="flex items-center gap-1">
+                        <MapPin className="h-2.5 w-2.5" />
+                        {p.location}
+                      </span>
+                      <span className="flex items-center gap-1">
+                        <Calendar className="h-2.5 w-2.5" />
+                        {p.startDate} — {p.endDate || "ongoing"}
+                      </span>
+                      <span className="flex items-center gap-1">
+                        <Users className="h-2.5 w-2.5" />
+                        {p.participantEstimate}
+                      </span>
+                    </div>
+                    <div className="mt-2 flex flex-wrap gap-1.5">
+                      {p.demands.map((d, i) => (
+                        <span
+                          key={i}
+                          className="rounded bg-[var(--color-border)] px-1.5 py-0.5 text-[9px] text-[var(--color-text-muted)]"
+                        >
+                          {d}
+                        </span>
+                      ))}
+                    </div>
+                    <div className="mt-2 grid gap-4 sm:grid-cols-2">
+                      <div>
+                        <span className="text-[9px] font-[family-name:var(--font-mono)] uppercase tracking-wider text-[var(--color-text-muted)]">
+                          Outcome
+                        </span>
+                        <p className="mt-0.5 text-[10px] leading-relaxed text-[var(--color-text-secondary)]">
+                          {p.outcome}
+                        </p>
+                      </div>
+                      <div>
+                        <span className="text-[9px] font-[family-name:var(--font-mono)] uppercase tracking-wider text-[var(--color-text-muted)]">
+                          Long-term Impact
+                        </span>
+                        <p className="mt-0.5 text-[10px] leading-relaxed text-[var(--color-text-secondary)]">
+                          {p.longTermImpact}
+                        </p>
+                      </div>
+                    </div>
                   </div>
-                </div>
-                <div className="mb-3 flex flex-wrap gap-1.5">
-                  {p.demands.map((d, i) => (
-                    <span
-                      key={i}
-                      className="rounded-md bg-[#27272a] px-2 py-0.5 text-[10px] text-[#a1a1aa]"
-                    >
-                      {d}
-                    </span>
-                  ))}
-                </div>
-                <div className="grid gap-4 text-xs sm:grid-cols-2">
-                  <div>
-                    <span className="text-[10px] font-medium uppercase tracking-wider text-[#71717a]">
-                      Outcome
-                    </span>
-                    <p className="mt-1 leading-relaxed text-[#a1a1aa]">
-                      {p.outcome}
-                    </p>
+                  <div className="hidden shrink-0 sm:block">
+                    <ChevronRight className="h-4 w-4 text-[var(--color-text-muted)] transition-colors group-hover:text-[var(--color-accent)]" />
                   </div>
-                  <div>
-                    <span className="text-[10px] font-medium uppercase tracking-wider text-[#71717a]">
-                      Long-term Impact
-                    </span>
-                    <p className="mt-1 leading-relaxed text-[#a1a1aa]">
-                      {p.longTermImpact}
-                    </p>
-                  </div>
-                </div>
-              </button>
-            ))}
+                </button>
+              ))}
+            </div>
           </div>
         )}
       </div>

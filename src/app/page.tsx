@@ -1,169 +1,192 @@
 import {
   FileText,
   Globe,
-  Building2,
-  AlertTriangle,
-  TrendingUp,
   ArrowRight,
+  ChevronRight,
 } from "lucide-react";
 
-const features = [
-  {
-    icon: FileText,
-    title: "Civic Issue Ledger",
-    description:
-      "Track real-world problems with evidence, jurisdiction mapping, and resolution timelines. Issue-first, not personality-first.",
-    href: "/civic-ledger",
-    color: "#ef4444",
-  },
-  {
-    icon: Globe,
-    title: "Civic Intel",
-    description:
-      "Government observatory with layered country reports, party profiles, protest tracking, and wellbeing measures.",
-    href: "/civic-intel",
-    color: "#3b82f6",
-  },
-  {
-    icon: Building2,
-    title: "Institutional Memory",
-    description:
-      "Promises tracked against outcomes. Budgets traced to delivery. Jurisdiction mapped to responsibility.",
-    href: "/civic-intel",
-    color: "#a855f7",
-  },
-  {
-    icon: AlertTriangle,
-    title: "Protest Observatory",
-    description:
-      "Beyond the viral moment. Track demands, state responses, outcomes, and long-term impact over years.",
-    href: "/civic-intel",
-    color: "#f59e0b",
-  },
-];
-
-const principles = [
-  "Issue-first, not personality-first",
-  "Evidence before virality",
-  "Transparent history",
-  "Separate fact, inference, and opinion",
-  "Protect vulnerable reporters",
-  "No single popularity score",
-  "Clear jurisdiction and responsibility",
-  "Structured solution comparison",
-  "Independent resolution verification",
-  "Open standards and exportable data",
+const stats = [
+  { label: "Issues tracked", value: "6", delta: null },
+  { label: "Countries mapped", value: "3", delta: null },
+  { label: "Protests documented", value: "4", delta: null },
+  { label: "Parties profiled", value: "5", delta: null },
 ];
 
 export default function HomePage() {
   return (
     <div className="min-h-screen">
-      {/* Hero */}
-      <section className="relative flex min-h-[85vh] items-center justify-center overflow-hidden">
-        {/* Background grid */}
-        <div
-          className="absolute inset-0 opacity-[0.03]"
-          style={{
-            backgroundImage:
-              "linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)",
-            backgroundSize: "60px 60px",
-          }}
-        />
-        {/* Glow */}
-        <div className="absolute top-1/4 left-1/2 h-96 w-96 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#ef4444]/5 blur-[120px]" />
+      {/* Hero - asymmetric, not centered */}
+      <section className="relative border-b border-[var(--color-border)]">
+        <div className="mx-auto max-w-[1400px] px-6 py-20 lg:py-28">
+          <div className="grid gap-12 lg:grid-cols-[1fr_400px]">
+            <div>
+              <div className="mb-6 flex items-center gap-2">
+                <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-status-verified)]" />
+                <span className="text-[10px] font-[family-name:var(--font-mono)] uppercase tracking-widest text-[var(--color-text-muted)]">
+                  live data
+                </span>
+              </div>
+              <h1 className="mb-4 text-4xl font-bold leading-[1.1] tracking-tight lg:text-6xl">
+                Public intelligence
+                <br />
+                <span className="text-[var(--color-accent)]">without the noise</span>
+              </h1>
+              <p className="mb-8 max-w-lg text-sm leading-relaxed text-[var(--color-text-secondary)]">
+                Structured issue tracking, evidence-linked government reports,
+                and protest monitoring. Issue-first, not personality-first.
+              </p>
+              <div className="flex items-center gap-3">
+                <a
+                  href="/civic-ledger"
+                  className="group inline-flex items-center gap-2 rounded bg-[var(--color-accent)] px-5 py-2.5 text-xs font-medium text-white transition-all hover:bg-[#dc2626]"
+                >
+                  Browse issues
+                  <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+                </a>
+                <a
+                  href="/civic-intel"
+                  className="inline-flex items-center gap-2 rounded border border-[var(--color-border)] px-5 py-2.5 text-xs font-medium text-[var(--color-text-secondary)] transition-all hover:border-[var(--color-border-strong)] hover:text-[var(--color-text)]"
+                >
+                  Country reports
+                </a>
+              </div>
+            </div>
 
-        <div className="relative mx-auto max-w-4xl px-6 text-center">
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-[#27272a] bg-[#18181b] px-4 py-1.5 text-xs text-[#a1a1aa]">
-            <span className="h-1.5 w-1.5 rounded-full bg-[#22c55e] animate-pulse" />
-            open civic infrastructure — v0.1
+            {/* Stats panel - right aligned */}
+            <div className="flex flex-col justify-center gap-px rounded border border-[var(--color-border)] bg-[var(--color-border)]">
+              {stats.map((s) => (
+                <div
+                  key={s.label}
+                  className="flex items-center justify-between bg-[var(--color-bg-raised)] px-5 py-4"
+                >
+                  <span className="text-xs text-[var(--color-text-muted)]">
+                    {s.label}
+                  </span>
+                  <span className="text-lg font-bold font-[family-name:var(--font-mono)] text-[var(--color-text)]">
+                    {s.value}
+                  </span>
+                </div>
+              ))}
+            </div>
           </div>
+        </div>
+      </section>
 
-          <h1 className="mb-6 text-5xl font-bold leading-tight tracking-tight md:text-7xl">
-            Structured
-            <br />
-            <span className="text-[#ef4444]">public intelligence</span>
-          </h1>
-
-          <p className="mx-auto mb-10 max-w-2xl text-lg leading-relaxed text-[#a1a1aa]">
-            A transparent, evidence-linked system for understanding how
-            governments and societies actually function — without propaganda or
-            one misleading score.
-          </p>
-
-          <div className="flex items-center justify-center gap-4">
+      {/* Two products */}
+      <section className="border-b border-[var(--color-border)]">
+        <div className="mx-auto max-w-[1400px]">
+          <div className="grid lg:grid-cols-2">
+            {/* Civic Ledger */}
             <a
               href="/civic-ledger"
-              className="group flex items-center gap-2 rounded-lg bg-[#ef4444] px-6 py-3 text-sm font-medium text-white transition-all hover:bg-[#dc2626]"
+              className="group relative border-b border-[var(--color-border)] p-8 transition-colors hover:bg-[var(--color-bg-raised)] lg:border-b-0 lg:border-r"
             >
-              Explore Issues
-              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+              <div className="mb-8 flex items-center gap-3">
+                <div className="flex h-8 w-8 items-center justify-center rounded bg-[var(--color-accent)]/10">
+                  <FileText className="h-4 w-4 text-[var(--color-accent)]" />
+                </div>
+                <div>
+                  <h2 className="text-lg font-semibold">Civic Issue Ledger</h2>
+                  <p className="text-xs text-[var(--color-text-muted)]">
+                    Evidence-linked issue tracking
+                  </p>
+                </div>
+              </div>
+
+              <div className="mb-6 space-y-3">
+                {[
+                  "Structured issue lifecycle with 16 stages",
+                  "8-signal vote system (not upvote/downvote)",
+                  "Jurisdiction mapping to responsible bodies",
+                  "Evidence chain with confidence levels",
+                  "Timeline tracking with official responses",
+                ].map((f, i) => (
+                  <div key={i} className="flex items-start gap-2">
+                    <ChevronRight className="mt-0.5 h-3 w-3 shrink-0 text-[var(--color-accent)]" />
+                    <span className="text-xs text-[var(--color-text-secondary)]">
+                      {f}
+                    </span>
+                  </div>
+                ))}
+              </div>
+
+              <div className="flex items-center gap-1.5 text-xs text-[var(--color-accent)]">
+                <span>Explore issues</span>
+                <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
+              </div>
             </a>
+
+            {/* Civic Intel */}
             <a
               href="/civic-intel"
-              className="flex items-center gap-2 rounded-lg border border-[#27272a] bg-[#18181b] px-6 py-3 text-sm font-medium text-[#a1a1aa] transition-all hover:border-[#3f3f46] hover:text-white"
+              className="group relative p-8 transition-colors hover:bg-[var(--color-bg-raised)]"
             >
-              Country Reports
+              <div className="mb-8 flex items-center gap-3">
+                <div className="flex h-8 w-8 items-center justify-center rounded bg-[var(--color-severity-medium)]/10">
+                  <Globe className="h-4 w-4 text-[var(--color-severity-medium)]" />
+                </div>
+                <div>
+                  <h2 className="text-lg font-semibold">Civic Intel</h2>
+                  <p className="text-xs text-[var(--color-text-muted)]">
+                    Government observatory
+                  </p>
+                </div>
+              </div>
+
+              <div className="mb-6 space-y-3">
+                {[
+                  "7-dimension country reports with trend tracking",
+                  "Party profiles with contradiction mapping",
+                  "Protest lifecycle documentation",
+                  "No single misleading score",
+                  "Multi-perspective analysis modes",
+                ].map((f, i) => (
+                  <div key={i} className="flex items-start gap-2">
+                    <ChevronRight className="mt-0.5 h-3 w-3 shrink-0 text-[var(--color-severity-medium)]" />
+                    <span className="text-xs text-[var(--color-text-secondary)]">
+                      {f}
+                    </span>
+                  </div>
+                ))}
+              </div>
+
+              <div className="flex items-center gap-1.5 text-xs text-[var(--color-severity-medium)]">
+                <span>View reports</span>
+                <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
+              </div>
             </a>
           </div>
         </div>
       </section>
 
-      {/* Features */}
-      <section className="border-t border-[#27272a] py-24">
-        <div className="mx-auto max-w-6xl px-6">
-          <div className="mb-16">
-            <h2 className="mb-4 text-3xl font-bold tracking-tight">
-              Two products. One mission.
-            </h2>
-            <p className="max-w-xl text-[#a1a1aa]">
-              Convert scattered complaints, evidence, promises, and official
-              responses into structured, auditable public records.
-            </p>
-          </div>
-
-          <div className="grid gap-6 md:grid-cols-2">
-            {features.map((f) => (
-              <a
-                key={f.title}
-                href={f.href}
-                className="group rounded-xl border border-[#27272a] bg-[#18181b] p-8 transition-all hover:border-[#3f3f46] hover:bg-[#1f1f23]"
-              >
-                <div
-                  className="mb-4 flex h-10 w-10 items-center justify-center rounded-lg"
-                  style={{ background: `${f.color}15` }}
-                >
-                  <f.icon className="h-5 w-5" style={{ color: f.color }} />
-                </div>
-                <h3 className="mb-2 text-lg font-semibold">{f.title}</h3>
-                <p className="text-sm leading-relaxed text-[#a1a1aa]">
-                  {f.description}
-                </p>
-              </a>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Principles */}
-      <section className="border-t border-[#27272a] py-24">
-        <div className="mx-auto max-w-4xl px-6">
-          <div className="mb-12 flex items-center gap-3">
-            <TrendingUp className="h-5 w-5 text-[#ef4444]" />
-            <h2 className="text-2xl font-bold tracking-tight">
-              Core principles
-            </h2>
-          </div>
-
-          <div className="grid gap-4 sm:grid-cols-2">
-            {principles.map((p, i) => (
+      {/* Principles - horizontal strip, not cards */}
+      <section className="border-b border-[var(--color-border)]">
+        <div className="mx-auto max-w-[1400px] px-6 py-12">
+          <h3 className="mb-6 text-[10px] font-[family-name:var(--font-mono)] uppercase tracking-widest text-[var(--color-text-muted)]">
+            Design principles
+          </h3>
+          <div className="grid gap-x-8 gap-y-3 sm:grid-cols-2 lg:grid-cols-3">
+            {[
+              "Issue-first, not personality-first",
+              "Evidence before virality",
+              "Transparent edit history",
+              "Separate fact, inference, opinion",
+              "Protect vulnerable reporters",
+              "No single popularity score",
+              "Clear jurisdiction mapping",
+              "Structured solution comparison",
+              "Independent resolution verification",
+            ].map((p, i) => (
               <div
                 key={i}
-                className="flex items-start gap-3 rounded-lg border border-[#27272a] bg-[#18181b] p-4"
+                className="flex items-center gap-2 border-b border-[var(--color-border)] pb-2"
               >
-                <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded bg-[#ef4444]/10 text-[10px] font-bold text-[#ef4444]">
-                  {i + 1}
+                <span className="font-[family-name:var(--font-mono)] text-[10px] text-[var(--color-text-muted)]">
+                  {String(i + 1).padStart(2, "0")}
                 </span>
-                <span className="text-sm text-[#d4d4d8]">{p}</span>
+                <span className="text-xs text-[var(--color-text-secondary)]">
+                  {p}
+                </span>
               </div>
             ))}
           </div>
@@ -171,15 +194,9 @@ export default function HomePage() {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-[#27272a] py-12">
-        <div className="mx-auto max-w-6xl px-6 text-center text-xs text-[#71717a]">
-          <p>
-            Politik — computational public-interest intelligence. Built to
-            convert scattered civic data into structured public knowledge.
-          </p>
-          <p className="mt-2">
-            v0.1 · Static prototype · No backend · Open data
-          </p>
+      <footer className="px-6 py-8">
+        <div className="mx-auto max-w-[1400px] text-[10px] font-[family-name:var(--font-mono)] text-[var(--color-text-muted)]">
+          politik v0.1 - computational public-interest intelligence
         </div>
       </footer>
     </div>
