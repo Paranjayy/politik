@@ -4,6 +4,8 @@ import { useState } from "react";
 import { countries } from "@/data/countries";
 import { parties } from "@/data/parties";
 import { protests } from "@/data/protests";
+import { issues } from "@/data/issues";
+import { crossReferences } from "@/data/cross-references";
 import type { CountryReport, PartyProfile, ProtestEvent } from "@/lib/types";
 import {
   Globe,
@@ -18,6 +20,7 @@ import {
   Users,
   MapPin,
   Calendar,
+  Link2,
 } from "lucide-react";
 
 const trendIcon: Record<string, React.ReactNode> = {
@@ -365,6 +368,83 @@ function PartyDetail({
                 ))}
               </div>
             </section>
+
+            {/* Related Issues (Cross-references) */}
+            {(() => {
+              const refs = crossReferences.filter(
+                (cr) => cr.partyId === party.id
+              );
+              if (refs.length === 0) return null;
+              return (
+                <section>
+                  <h2 className="mb-4 flex items-center gap-2 text-[10px] font-[family-name:var(--font-mono)] uppercase tracking-widest text-[var(--color-severity-medium)]">
+                    <Link2 className="h-3 w-3 text-[var(--color-severity-medium)]" />
+                    Related Issues
+                  </h2>
+                  <div className="space-y-2">
+                    {refs.map((ref, i) => {
+                      const issue = issues.find((iss) => iss.id === ref.issueId);
+                      const relevanceColor =
+                        ref.relevance === "direct"
+                          ? "var(--color-accent)"
+                          : ref.relevance === "indirect"
+                            ? "var(--color-severity-high)"
+                            : "var(--color-text-muted)";
+                      return (
+                        <div
+                          key={i}
+                          className="rounded border border-[var(--color-border)] bg-[var(--color-bg-surface)] p-3"
+                        >
+                          <div className="flex items-center gap-2 mb-1">
+                            <span className="font-[family-name:var(--font-mono)] text-[9px] text-[var(--color-text-muted)]">
+                              {ref.issueId}
+                            </span>
+                            <span
+                              className="rounded px-1.5 py-0.5 text-[8px] font-medium uppercase"
+                              style={{
+                                backgroundColor: `${relevanceColor}15`,
+                                color: relevanceColor,
+                              }}
+                            >
+                              {ref.relevance}
+                            </span>
+                            {issue && (
+                              <span
+                                className="rounded px-1.5 py-0.5 text-[8px] font-medium"
+                                style={{
+                                  backgroundColor:
+                                    issue.severity === "critical"
+                                      ? "rgba(239,68,68,0.1)"
+                                      : issue.severity === "high"
+                                        ? "rgba(245,158,11,0.1)"
+                                        : "rgba(113,113,122,0.1)",
+                                  color:
+                                    issue.severity === "critical"
+                                      ? "#ef4444"
+                                      : issue.severity === "high"
+                                        ? "#f59e0b"
+                                        : "#71717a",
+                                }}
+                              >
+                                {issue.severity}
+                              </span>
+                            )}
+                          </div>
+                          {issue && (
+                            <div className="text-[10px] font-medium text-[var(--color-text)] mb-1">
+                              {issue.title}
+                            </div>
+                          )}
+                          <p className="text-[9px] leading-relaxed text-[var(--color-text-muted)]">
+                            {ref.connection}
+                          </p>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </section>
+              );
+            })()}
           </div>
         </div>
       </div>
