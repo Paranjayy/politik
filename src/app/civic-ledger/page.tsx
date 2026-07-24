@@ -14,6 +14,7 @@ import {
   ChevronDown,
   ChevronRight,
 } from "lucide-react";
+import { ExportButton } from "@/components/ExportButton";
 
 const statusColors: Record<string, string> = {
   reported: "#71717a",
@@ -420,8 +421,11 @@ export default function CivicLedgerPage() {
               Public Issue Tracker
             </h1>
           </div>
-          <div className="font-[family-name:var(--font-mono)] text-[10px] text-[var(--color-text-muted)]">
-            {filtered.length} of {issues.length} issues
+          <div className="flex items-center gap-3">
+            <div className="font-[family-name:var(--font-mono)] text-[10px] text-[var(--color-text-muted)]">
+              {filtered.length} of {issues.length} issues
+            </div>
+            <ExportButton data={filtered} filename="civic-ledger-export" />
           </div>
         </div>
 

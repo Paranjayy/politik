@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { KeyboardShortcuts } from "@/components/KeyboardShortcuts";
 
 export const metadata: Metadata = {
   title: "Politik - Civic Intelligence Platform",
@@ -45,6 +46,7 @@ export default function RootLayout({
             </div>
           </div>
         </nav>
+        <KeyboardShortcuts />
         <main className="pt-14">{children}</main>
       </body>
     </html>

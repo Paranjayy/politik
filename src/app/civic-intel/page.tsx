@@ -22,6 +22,7 @@ import {
   Calendar,
   Link2,
 } from "lucide-react";
+import { ExportButton } from "@/components/ExportButton";
 
 const trendIcon: Record<string, React.ReactNode> = {
   improving: <TrendingUp className="h-3 w-3 text-[#22c55e]" />,
@@ -655,6 +656,7 @@ export default function CivicIntelPage() {
               Government Observatory
             </h1>
           </div>
+          <ExportButton data={tab === "countries" ? countries : tab === "parties" ? parties : protests} filename={`civic-intel-${tab}`} />
         </div>
 
         {/* Tab bar */}
