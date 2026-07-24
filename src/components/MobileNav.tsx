@@ -8,6 +8,7 @@ const navLinks = [
   { href: "/civic-ledger", label: "Issues" },
   { href: "/civic-intel", label: "Intel" },
   { href: "/compare-parties", label: "Parties" },
+  { href: "/network", label: "Network" },
   { href: "/timeline", label: "Timeline" },
   { href: "/briefing", label: "Briefing" },
   { href: "/world", label: "World" },

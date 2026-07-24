@@ -174,8 +174,12 @@ export default function HomePage() {
             {[
               { href: "/explore", label: "Issue Explorer", desc: "Filter & sort all issues", color: "var(--color-accent)" },
               { href: "/compare-parties", label: "Party Comparison", desc: "Side-by-side party analysis", color: "var(--color-severity-medium)" },
-              { href: "/timeline", label: "Global Timeline", desc: "Chronological event view", color: "var(--color-status-verified)" },
-              { href: "/civic-intel/wiki", label: "Protest Wiki", desc: "61 protests from 29 countries", color: "var(--color-severity-high)" },
+              { href: "/network", label: "Network", desc: "Party-issue connections", color: "#a855f7" },
+              { href: "/world-map", label: "World Map", desc: "Geographic activity view", color: "var(--color-status-verified)" },
+              { href: "/timeline", label: "Global Timeline", desc: "Chronological event view", color: "var(--color-severity-high)" },
+              { href: "/country-dashboard", label: "Country Dashboard", desc: "Health indicators per country", color: "var(--color-severity-medium)" },
+              { href: "/severity-calc", label: "Severity Calculator", desc: "8-signal vote scoring", color: "var(--color-accent)" },
+              { href: "/export", label: "Data Export", desc: "Download JSON/CSV", color: "#06b6d4" },
             ].map((item) => (
               <a key={item.href} href={item.href}
                 className="group rounded-lg border border-[var(--color-border)] p-5 transition-all hover:border-[var(--color-border-strong)] hover:bg-[var(--color-bg-raised)]">

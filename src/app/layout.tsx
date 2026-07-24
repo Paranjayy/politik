@@ -42,6 +42,9 @@ export default function RootLayout({
               <a href="/compare-parties" className="text-xs text-[var(--color-text-muted)] transition-colors hover:text-[var(--color-text)]">
                 Parties
               </a>
+              <a href="/network" className="text-xs text-[var(--color-text-muted)] transition-colors hover:text-[var(--color-text)]">
+                Network
+              </a>
               <a href="/timeline" className="text-xs text-[var(--color-text-muted)] transition-colors hover:text-[var(--color-text)]">
                 Timeline
               </a>
