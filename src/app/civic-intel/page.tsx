@@ -657,6 +657,9 @@ export default function CivicIntelPage() {
               <a href="/civic-intel/compare" className="text-[10px] font-[family-name:var(--font-mono)] text-[var(--color-text-muted)] transition-colors hover:text-[var(--color-text)]">
                 Compare
               </a>
+              <a href="/civic-intel/wiki" className="text-[10px] font-[family-name:var(--font-mono)] text-[var(--color-text-muted)] transition-colors hover:text-[var(--color-text)]">
+                Wiki
+              </a>
             </div>
             <h1 className="text-2xl font-bold tracking-tight">
               Government Observatory
