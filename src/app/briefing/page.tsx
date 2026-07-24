@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import { issues } from "@/data/issues";
 import { globalProtests } from "@/data/global-protests";
 
@@ -355,49 +356,37 @@ export default function BriefingPage() {
               {recentUpdates.map((issue) => {
                 const lastEvent = lastTimelineEvent(issue);
                 return (
-                  <a
-                    key={`${issue.id}-${issue.lastUpdated}`}
-                    href={`/civic-ledger/${issue.id}`}
-                    className="group bg-[var(--color-bg)] px-4 py-3 border-t border-[var(--color-border)] first:border-t-0"
-                  >
-                    <div className="flex items-center gap-2">
-                      <span
-                        className="h-1.5 w-1.5 rounded-full shrink-0"
-                        style={{ backgroundColor: severityColor[issue.severity] }}
-                      />
-                      <span className="text-xs text-[var(--color-text-secondary)] group-hover:text-[var(--color-text)] transition-colors truncate">
-                        {issue.title}
+                  <React.Fragment key={`${issue.id}-${issue.lastUpdated}`}>
+                    <a
+                      href={`/civic-ledger/${issue.id}`}
+                      className="group bg-[var(--color-bg)] px-4 py-3 border-t border-[var(--color-border)] first:border-t-0"
+                    >
+                      <div className="flex items-center gap-2">
+                        <span
+                          className="h-1.5 w-1.5 rounded-full shrink-0"
+                          style={{ backgroundColor: severityColor[issue.severity] }}
+                        />
+                        <span className="text-xs text-[var(--color-text-secondary)] group-hover:text-[var(--color-text)] transition-colors truncate">
+                          {issue.title}
+                        </span>
+                      </div>
+                      <div className="font-[family-name:var(--font-mono)] text-[9px] text-[var(--color-text-muted)] mt-0.5 ml-3.5">
+                        {issue.country}
+                      </div>
+                    </a>
+                    <div className="bg-[var(--color-bg)] px-4 py-3 border-t border-[var(--color-border)] first:border-t-0 flex items-center">
+                      <span className="font-[family-name:var(--font-mono)] text-[10px] text-[var(--color-text-secondary)] line-clamp-2">
+                        {lastEvent?.event || "—"}
                       </span>
                     </div>
-                    <div className="font-[family-name:var(--font-mono)] text-[9px] text-[var(--color-text-muted)] mt-0.5 ml-3.5">
-                      {issue.country}
+                    <div className="bg-[var(--color-bg)] px-4 py-3 border-t border-[var(--color-border)] first:border-t-0 flex items-center">
+                      <span className="font-[family-name:var(--font-mono)] text-[10px] text-[var(--color-text-muted)] whitespace-nowrap">
+                        {formatDate(issue.lastUpdated)}
+                      </span>
                     </div>
-                  </a>
+                  </React.Fragment>
                 );
               })}
-              {recentUpdates.map((issue) => {
-                const lastEvent = lastTimelineEvent(issue);
-                return (
-                  <div
-                    key={`${issue.id}-event`}
-                    className="bg-[var(--color-bg)] px-4 py-3 border-t border-[var(--color-border)] first:border-t-0 flex items-center"
-                  >
-                    <span className="font-[family-name:var(--font-mono)] text-[10px] text-[var(--color-text-secondary)] line-clamp-2">
-                      {lastEvent?.event || "—"}
-                    </span>
-                  </div>
-                );
-              })}
-              {recentUpdates.map((issue) => (
-                <div
-                  key={`${issue.id}-date`}
-                  className="bg-[var(--color-bg)] px-4 py-3 border-t border-[var(--color-border)] first:border-t-0 flex items-center"
-                >
-                  <span className="font-[family-name:var(--font-mono)] text-[10px] text-[var(--color-text-muted)] whitespace-nowrap">
-                    {formatDate(issue.lastUpdated)}
-                  </span>
-                </div>
-              ))}
             </div>
           </div>
         </section>

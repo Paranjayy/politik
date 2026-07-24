@@ -36,6 +36,12 @@ export default function RootLayout({
               <a href="/civic-intel" className="text-xs text-[var(--color-text-muted)] transition-colors hover:text-[var(--color-text)]">
                 Intel
               </a>
+              <a href="/briefing" className="text-xs text-[var(--color-text-muted)] transition-colors hover:text-[var(--color-text)]">
+                Briefing
+              </a>
+              <a href="/world" className="text-xs text-[var(--color-text-muted)] transition-colors hover:text-[var(--color-text)]">
+                World
+              </a>
               <a href="/stats" className="text-xs text-[var(--color-text-muted)] transition-colors hover:text-[var(--color-text)]">
                 Stats
               </a>
@@ -64,6 +70,8 @@ export default function RootLayout({
               <div className="flex flex-wrap items-center gap-4">
                 <a href="/civic-ledger" className="font-[family-name:var(--font-mono)] text-[10px] text-[var(--color-text-muted)] transition-colors hover:text-[var(--color-text)]">Issues</a>
                 <a href="/civic-intel" className="font-[family-name:var(--font-mono)] text-[10px] text-[var(--color-text-muted)] transition-colors hover:text-[var(--color-text)]">Intel</a>
+                <a href="/briefing" className="font-[family-name:var(--font-mono)] text-[10px] text-[var(--color-text-muted)] transition-colors hover:text-[var(--color-text)]">Briefing</a>
+                <a href="/world" className="font-[family-name:var(--font-mono)] text-[10px] text-[var(--color-text-muted)] transition-colors hover:text-[var(--color-text)]">World</a>
                 <a href="/stats" className="font-[family-name:var(--font-mono)] text-[10px] text-[var(--color-text-muted)] transition-colors hover:text-[var(--color-text)]">Stats</a>
                 <a href="/search" className="font-[family-name:var(--font-mono)] text-[10px] text-[var(--color-text-muted)] transition-colors hover:text-[var(--color-text)]">Search</a>
                 <a href="/about" className="font-[family-name:var(--font-mono)] text-[10px] text-[var(--color-text-muted)] transition-colors hover:text-[var(--color-text)]">About</a>

@@ -6,6 +6,8 @@ const navLinks = [
   { href: "/", label: "Home" },
   { href: "/civic-ledger", label: "Issues" },
   { href: "/civic-intel", label: "Intel" },
+  { href: "/briefing", label: "Briefing" },
+  { href: "/world", label: "World" },
   { href: "/stats", label: "Stats" },
   { href: "/search", label: "Search" },
   { href: "/learn", label: "Learn" },
