@@ -64,6 +64,10 @@ export default function RootLayout({
               <a href="/learn" className="text-xs text-[var(--color-text-muted)] transition-colors hover:text-[var(--color-text)]">
                 Learn
               </a>
+              <div className="h-3 w-px bg-[var(--color-border)]" />
+              <a href="/export" className="text-xs text-[var(--color-text-muted)] transition-colors hover:text-[var(--color-text)]">
+                Export
+              </a>
             </div>
             <MobileNav />
           </div>

@@ -7,7 +7,11 @@ const shortcuts = [
   { keys: ["/"], label: "Focus search" },
   { keys: ["g", "i"], label: "Go to Issues" },
   { keys: ["g", "c"], label: "Go to Civic Intel" },
+  { keys: ["g", "e"], label: "Go to Explorer" },
+  { keys: ["g", "p"], label: "Go to Parties" },
+  { keys: ["g", "t"], label: "Go to Timeline" },
   { keys: ["g", "h"], label: "Go to Home" },
+  { keys: ["g", "s"], label: "Go to Stats" },
   { keys: ["?"], label: "Toggle this help" },
 ];
 
@@ -46,8 +50,16 @@ export function KeyboardShortcuts() {
           window.location.href = "/civic-ledger";
         } else if (e.key === "c") {
           window.location.href = "/civic-intel";
+        } else if (e.key === "e") {
+          window.location.href = "/explore";
+        } else if (e.key === "p") {
+          window.location.href = "/compare-parties";
+        } else if (e.key === "t") {
+          window.location.href = "/timeline";
         } else if (e.key === "h") {
           window.location.href = "/";
+        } else if (e.key === "s") {
+          window.location.href = "/stats";
         }
         return;
       }

@@ -15,6 +15,7 @@ const navLinks = [
   { href: "/search", label: "Search" },
   { href: "/learn", label: "Learn" },
   { href: "/about", label: "About" },
+  { href: "/export", label: "Export" },
 ];
 
 export function MobileNav() {
