@@ -35,6 +35,9 @@ export default function RootLayout({
               <a href="/civic-intel" className="text-xs text-[var(--color-text-muted)] transition-colors hover:text-[var(--color-text)]">
                 Intel
               </a>
+              <a href="/stats" className="text-xs text-[var(--color-text-muted)] transition-colors hover:text-[var(--color-text)]">
+                Stats
+              </a>
               <div className="h-3 w-px bg-[var(--color-border)]" />
               <a href="/search" className="text-xs text-[var(--color-text-muted)] transition-colors hover:text-[var(--color-text)]">
                 Search
