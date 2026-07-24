@@ -416,6 +416,12 @@ export default function CivicLedgerPage() {
               <span className="text-[10px] font-[family-name:var(--font-mono)] uppercase tracking-widest text-[var(--color-accent)]">
                 Civic Issue Ledger
               </span>
+              <a href="/civic-ledger/dashboard" className="text-[10px] font-[family-name:var(--font-mono)] text-[var(--color-text-muted)] transition-colors hover:text-[var(--color-text)]">
+                Dashboard
+              </a>
+              <a href="/civic-ledger/connections" className="text-[10px] font-[family-name:var(--font-mono)] text-[var(--color-text-muted)] transition-colors hover:text-[var(--color-text)]">
+                Connections
+              </a>
             </div>
             <h1 className="text-2xl font-bold tracking-tight">
               Public Issue Tracker

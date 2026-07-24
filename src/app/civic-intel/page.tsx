@@ -651,6 +651,12 @@ export default function CivicIntelPage() {
               <span className="text-[10px] font-[family-name:var(--font-mono)] uppercase tracking-widest text-[var(--color-severity-medium)]">
                 Civic Intel
               </span>
+              <a href="/civic-intel/timeline" className="text-[10px] font-[family-name:var(--font-mono)] text-[var(--color-text-muted)] transition-colors hover:text-[var(--color-text)]">
+                Timeline
+              </a>
+              <a href="/civic-intel/compare" className="text-[10px] font-[family-name:var(--font-mono)] text-[var(--color-text-muted)] transition-colors hover:text-[var(--color-text)]">
+                Compare
+              </a>
             </div>
             <h1 className="text-2xl font-bold tracking-tight">
               Government Observatory

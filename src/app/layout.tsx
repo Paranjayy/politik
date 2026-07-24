@@ -42,15 +42,33 @@ export default function RootLayout({
               <a href="/search" className="text-xs text-[var(--color-text-muted)] transition-colors hover:text-[var(--color-text)]">
                 Search
               </a>
-              <div className="h-3 w-px bg-[var(--color-border)]" />
-              <span className="text-[10px] font-[family-name:var(--font-mono)] text-[var(--color-text-muted)]">
-                open civic infra
-              </span>
+              <a href="/about" className="text-xs text-[var(--color-text-muted)] transition-colors hover:text-[var(--color-text)]">
+                About
+              </a>
             </div>
           </div>
         </nav>
         <KeyboardShortcuts />
-        <main className="pt-14">{children}</main>
+        <main className="pt-14 min-h-[calc(100vh-3.5rem)]">{children}</main>
+        <footer className="border-t border-[var(--color-border)] bg-[var(--color-bg)]/90">
+          <div className="mx-auto max-w-[1400px] px-6 py-6">
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+              <div className="font-[family-name:var(--font-mono)] text-[10px] text-[var(--color-text-muted)]">
+                politik v0.1 — open civic infrastructure
+              </div>
+              <div className="flex flex-wrap items-center gap-4">
+                <a href="/civic-ledger" className="font-[family-name:var(--font-mono)] text-[10px] text-[var(--color-text-muted)] transition-colors hover:text-[var(--color-text)]">Issues</a>
+                <a href="/civic-intel" className="font-[family-name:var(--font-mono)] text-[10px] text-[var(--color-text-muted)] transition-colors hover:text-[var(--color-text)]">Intel</a>
+                <a href="/stats" className="font-[family-name:var(--font-mono)] text-[10px] text-[var(--color-text-muted)] transition-colors hover:text-[var(--color-text)]">Stats</a>
+                <a href="/search" className="font-[family-name:var(--font-mono)] text-[10px] text-[var(--color-text-muted)] transition-colors hover:text-[var(--color-text)]">Search</a>
+                <a href="/about" className="font-[family-name:var(--font-mono)] text-[10px] text-[var(--color-text-muted)] transition-colors hover:text-[var(--color-text)]">About</a>
+              </div>
+            </div>
+            <div className="mt-4 font-[family-name:var(--font-mono)] text-[9px] text-[var(--color-text-muted)]/60">
+              Data is illustrative. Verify independently.
+            </div>
+          </div>
+        </footer>
       </body>
     </html>
   );
