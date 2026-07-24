@@ -15,10 +15,10 @@ const stats = [
 export default function HomePage() {
   return (
     <div className="min-h-screen">
-      {/* Hero - asymmetric, not centered */}
+      {/* Hero */}
       <section className="relative border-b border-[var(--color-border)]">
-        <div className="mx-auto max-w-[1400px] px-6 py-20 lg:py-28">
-          <div className="grid gap-12 lg:grid-cols-[1fr_400px]">
+        <div className="mx-auto max-w-[1400px] px-6 pt-24 pb-16 lg:pt-32 lg:pb-24">
+          <div className="grid gap-12 lg:grid-cols-[1fr_360px] items-start">
             <div>
               <div className="mb-6 flex items-center gap-2">
                 <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-status-verified)]" />
@@ -26,7 +26,7 @@ export default function HomePage() {
                   live data
                 </span>
               </div>
-              <h1 className="mb-4 text-4xl font-bold leading-[1.1] tracking-tight lg:text-6xl">
+              <h1 className="mb-6 text-4xl font-bold leading-[1.1] tracking-tight lg:text-5xl xl:text-6xl">
                 Public intelligence
                 <br />
                 <span className="text-[var(--color-accent)]">without the noise</span>
@@ -52,8 +52,8 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Stats panel - right aligned */}
-            <div className="flex flex-col justify-center gap-px rounded border border-[var(--color-border)] bg-[var(--color-border)]">
+            {/* Stats panel */}
+            <div className="flex flex-col gap-px rounded border border-[var(--color-border)] bg-[var(--color-border)] lg:mt-8">
               {stats.map((s) => (
                 <div
                   key={s.label}
@@ -159,9 +159,9 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Principles - horizontal strip, not cards */}
+      {/* Principles */}
       <section className="border-b border-[var(--color-border)]">
-        <div className="mx-auto max-w-[1400px] px-6 py-12">
+        <div className="mx-auto max-w-[1400px] px-6 py-16">
           <h3 className="mb-6 text-[10px] font-[family-name:var(--font-mono)] uppercase tracking-widest text-[var(--color-text-muted)]">
             Design principles
           </h3>
