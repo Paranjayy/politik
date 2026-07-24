@@ -12,6 +12,8 @@ const navLinks = [
   { href: "/briefing", label: "Briefing" },
   { href: "/world", label: "World" },
   { href: "/stats", label: "Stats" },
+  { href: "/country-dashboard", label: "Dashboard" },
+  { href: "/severity-calc", label: "Calculator" },
   { href: "/search", label: "Search" },
   { href: "/learn", label: "Learn" },
   { href: "/about", label: "About" },
