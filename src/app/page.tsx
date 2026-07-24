@@ -38,10 +38,10 @@ export default function HomePage() {
 
           <div className="flex items-center gap-4 mb-16">
             <a
-              href="/civic-ledger"
+              href="/explore"
               className="group inline-flex items-center gap-2 rounded-md bg-[var(--color-accent)] px-6 py-3 text-sm font-medium text-white transition-all hover:bg-[#dc2626]"
             >
-              Browse issues
+              Explore issues
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
             </a>
             <a
@@ -49,6 +49,12 @@ export default function HomePage() {
               className="inline-flex items-center gap-2 rounded-md border border-[var(--color-border)] px-6 py-3 text-sm font-medium text-[var(--color-text-secondary)] transition-all hover:border-[var(--color-border-strong)] hover:text-[var(--color-text)]"
             >
               Country reports
+            </a>
+            <a
+              href="/timeline"
+              className="inline-flex items-center gap-2 rounded-md border border-[var(--color-border)] px-6 py-3 text-sm font-medium text-[var(--color-text-secondary)] transition-all hover:border-[var(--color-border-strong)] hover:text-[var(--color-text)]"
+            >
+              Global timeline
             </a>
           </div>
 
@@ -154,6 +160,30 @@ export default function HomePage() {
                 <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
               </div>
             </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Quick access */}
+      <section className="border-b border-[var(--color-border)]">
+        <div className="mx-auto max-w-[1400px] px-6 py-12">
+          <h3 className="mb-6 text-[10px] font-[family-name:var(--font-mono)] uppercase tracking-widest text-[var(--color-text-muted)]">
+            Quick access
+          </h3>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              { href: "/explore", label: "Issue Explorer", desc: "Filter & sort all issues", color: "var(--color-accent)" },
+              { href: "/compare-parties", label: "Party Comparison", desc: "Side-by-side party analysis", color: "var(--color-severity-medium)" },
+              { href: "/timeline", label: "Global Timeline", desc: "Chronological event view", color: "var(--color-status-verified)" },
+              { href: "/civic-intel/wiki", label: "Protest Wiki", desc: "61 protests from 29 countries", color: "var(--color-severity-high)" },
+            ].map((item) => (
+              <a key={item.href} href={item.href}
+                className="group rounded-lg border border-[var(--color-border)] p-5 transition-all hover:border-[var(--color-border-strong)] hover:bg-[var(--color-bg-raised)]">
+                <div className="mb-2 h-1 w-8 rounded-full" style={{ backgroundColor: item.color }} />
+                <h4 className="text-sm font-medium text-[var(--color-text)] group-hover:text-[var(--color-accent)]">{item.label}</h4>
+                <p className="mt-1 text-xs text-[var(--color-text-muted)]">{item.desc}</p>
+              </a>
+            ))}
           </div>
         </div>
       </section>

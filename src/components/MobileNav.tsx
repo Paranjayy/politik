@@ -4,8 +4,11 @@ import { useState, useEffect, useCallback } from "react";
 
 const navLinks = [
   { href: "/", label: "Home" },
+  { href: "/explore", label: "Explore" },
   { href: "/civic-ledger", label: "Issues" },
   { href: "/civic-intel", label: "Intel" },
+  { href: "/compare-parties", label: "Parties" },
+  { href: "/timeline", label: "Timeline" },
   { href: "/briefing", label: "Briefing" },
   { href: "/world", label: "World" },
   { href: "/stats", label: "Stats" },

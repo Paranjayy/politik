@@ -30,11 +30,20 @@ export default function RootLayout({
               </span>
             </a>
             <div className="hidden lg:flex items-center gap-6">
+              <a href="/explore" className="text-xs text-[var(--color-text-muted)] transition-colors hover:text-[var(--color-text)]">
+                Explore
+              </a>
               <a href="/civic-ledger" className="text-xs text-[var(--color-text-muted)] transition-colors hover:text-[var(--color-text)]">
                 Issues
               </a>
               <a href="/civic-intel" className="text-xs text-[var(--color-text-muted)] transition-colors hover:text-[var(--color-text)]">
                 Intel
+              </a>
+              <a href="/compare-parties" className="text-xs text-[var(--color-text-muted)] transition-colors hover:text-[var(--color-text)]">
+                Parties
+              </a>
+              <a href="/timeline" className="text-xs text-[var(--color-text-muted)] transition-colors hover:text-[var(--color-text)]">
+                Timeline
               </a>
               <a href="/briefing" className="text-xs text-[var(--color-text-muted)] transition-colors hover:text-[var(--color-text)]">
                 Briefing
