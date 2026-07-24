@@ -35,6 +35,10 @@ export default function RootLayout({
                 Intel
               </a>
               <div className="h-3 w-px bg-[var(--color-border)]" />
+              <a href="/search" className="text-xs text-[var(--color-text-muted)] transition-colors hover:text-[var(--color-text)]">
+                Search
+              </a>
+              <div className="h-3 w-px bg-[var(--color-border)]" />
               <span className="text-[10px] font-[family-name:var(--font-mono)] text-[var(--color-text-muted)]">
                 open civic infra
               </span>

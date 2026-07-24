@@ -8,7 +8,7 @@ import {
 const stats = [
   { label: "Issues tracked", value: "6", delta: null },
   { label: "Countries mapped", value: "3", delta: null },
-  { label: "Protests documented", value: "4", delta: null },
+  { label: "Protests documented", value: "8", delta: null },
   { label: "Parties profiled", value: "5", delta: null },
 ];
 
