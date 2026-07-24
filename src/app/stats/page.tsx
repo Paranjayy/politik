@@ -66,19 +66,19 @@ function calculateDuration(startDate: string, endDate?: string): string {
 
 function BarChart({ data, maxVal }: { data: { label: string; count: number }[]; maxVal: number }) {
   return (
-    <div className="space-y-2">
+    <div className="space-y-3">
       {data.map((item) => (
-        <div key={item.label} className="flex items-center gap-3">
-          <div className="w-32 text-right font-[family-name:var(--font-mono)] text-[10px] text-[var(--color-text-muted)] truncate">
+        <div key={item.label} className="flex items-center gap-4">
+          <div className="w-32 text-right font-[family-name:var(--font-mono)] text-[11px] text-[var(--color-text-muted)] truncate">
             {item.label}
           </div>
-          <div className="flex-1 h-5 bg-[var(--color-bg-surface)] border border-[var(--color-border)] overflow-hidden">
+          <div className="flex-1 h-7 rounded-md bg-[var(--color-bg-surface)] overflow-hidden">
             <div
-              className="h-full bg-[var(--color-accent)] transition-all duration-500"
+              className="h-full rounded-md bg-[var(--color-accent)] transition-all duration-500"
               style={{ width: `${(item.count / maxVal) * 100}%` }}
             />
           </div>
-          <div className="w-8 text-left font-[family-name:var(--font-mono)] text-[10px] text-[var(--color-text-secondary)]">
+          <div className="w-8 text-left font-[family-name:var(--font-mono)] text-xs font-medium text-[var(--color-text-secondary)]">
             {item.count}
           </div>
         </div>
@@ -146,14 +146,14 @@ export default function StatsPage() {
     .slice(0, 5);
 
   return (
-    <div className="min-h-screen bg-[var(--color-bg)] p-6">
-      <div className="mx-auto max-w-[1400px] space-y-10">
+    <div className="min-h-screen bg-[var(--color-bg)]">
+      <div className="mx-auto max-w-[1400px] px-6 pt-20 pb-16 space-y-12">
         {/* Header */}
-        <div className="border-b border-[var(--color-border)] pb-6">
-          <h1 className="text-2xl font-bold tracking-tight text-[var(--color-text)]">
+        <div className="border-b border-[var(--color-border)] pb-8">
+          <h1 className="text-3xl font-bold tracking-tight text-[var(--color-text)] lg:text-4xl">
             Statistics Overview
           </h1>
-          <p className="mt-2 font-[family-name:var(--font-mono)] text-[11px] text-[var(--color-text-muted)]">
+          <p className="mt-3 font-[family-name:var(--font-mono)] text-[11px] text-[var(--color-text-muted)]">
             Aggregated data across all tracked issues, protests, countries, and
             parties
           </p>
@@ -161,10 +161,10 @@ export default function StatsPage() {
 
         {/* Section 1: Global Overview */}
         <section>
-          <h2 className="mb-4 text-sm font-semibold uppercase tracking-wider text-[var(--color-text-muted)] border-b border-[var(--color-border)] pb-2">
+          <h2 className="mb-6 text-[10px] font-[family-name:var(--font-mono)] uppercase tracking-widest text-[var(--color-text-muted)]">
             Global Overview
           </h2>
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
+          <div className="grid grid-cols-2 gap-px rounded-lg border border-[var(--color-border)] bg-[var(--color-border)] sm:grid-cols-3 lg:grid-cols-6">
             {[
               { label: "Total Issues", value: totalIssues },
               { label: "Affected Population", value: totalAffected.toLocaleString() },
@@ -175,12 +175,12 @@ export default function StatsPage() {
             ].map((stat) => (
               <div
                 key={stat.label}
-                className="border border-[var(--color-border)] bg-[var(--color-bg-raised)] p-4"
+                className="flex flex-col gap-1 bg-[var(--color-bg-raised)] px-5 py-4"
               >
-                <div className="font-[family-name:var(--font-mono)] text-[10px] text-[var(--color-text-muted)] mb-1">
+                <div className="font-[family-name:var(--font-mono)] text-[10px] uppercase tracking-wider text-[var(--color-text-muted)]">
                   {stat.label}
                 </div>
-                <div className="text-xl font-bold text-[var(--color-text)]">
+                <div className="text-xl font-bold font-[family-name:var(--font-mono)] text-[var(--color-text)]">
                   {stat.value}
                 </div>
               </div>
@@ -190,25 +190,25 @@ export default function StatsPage() {
 
         {/* Section 2: Issues by Severity */}
         <section>
-          <h2 className="mb-4 text-sm font-semibold uppercase tracking-wider text-[var(--color-text-muted)] border-b border-[var(--color-border)] pb-2">
+          <h2 className="mb-6 text-[10px] font-[family-name:var(--font-mono)] uppercase tracking-widest text-[var(--color-text-muted)]">
             Issues by Severity
           </h2>
-          <div className="space-y-2">
+          <div className="space-y-3">
             {severityData.map((item) => (
-              <div key={item.label} className="flex items-center gap-3">
-                <div className="w-24 text-right font-[family-name:var(--font-mono)] text-[10px] text-[var(--color-text-muted)]">
+              <div key={item.label} className="flex items-center gap-4">
+                <div className="w-20 text-right font-[family-name:var(--font-mono)] text-[11px] text-[var(--color-text-muted)]">
                   {item.label}
                 </div>
-                <div className="flex-1 h-6 bg-[var(--color-bg-surface)] border border-[var(--color-border)] overflow-hidden">
+                <div className="flex-1 h-7 rounded-md bg-[var(--color-bg-surface)] overflow-hidden">
                   <div
-                    className="h-full transition-all duration-500"
+                    className="h-full rounded-md transition-all duration-500"
                     style={{
                       width: `${(item.count / maxSeverity) * 100}%`,
                       backgroundColor: severityColor[item.label] || "var(--color-accent)",
                     }}
                   />
                 </div>
-                <div className="w-8 text-left font-[family-name:var(--font-mono)] text-[10px] text-[var(--color-text-secondary)]">
+                <div className="w-8 text-left font-[family-name:var(--font-mono)] text-xs font-medium text-[var(--color-text-secondary)]">
                   {item.count}
                 </div>
               </div>
@@ -218,7 +218,7 @@ export default function StatsPage() {
 
         {/* Section 3: Issues by Domain */}
         <section>
-          <h2 className="mb-4 text-sm font-semibold uppercase tracking-wider text-[var(--color-text-muted)] border-b border-[var(--color-border)] pb-2">
+          <h2 className="mb-6 text-[10px] font-[family-name:var(--font-mono)] uppercase tracking-widest text-[var(--color-text-muted)]">
             Issues by Domain
           </h2>
           <BarChart data={domainData} maxVal={maxDomain} />
@@ -226,10 +226,10 @@ export default function StatsPage() {
 
         {/* Section 4: Protest Impact Analysis */}
         <section>
-          <h2 className="mb-4 text-sm font-semibold uppercase tracking-wider text-[var(--color-text-muted)] border-b border-[var(--color-border)] pb-2">
+          <h2 className="mb-6 text-[10px] font-[family-name:var(--font-mono)] uppercase tracking-widest text-[var(--color-text-muted)]">
             Protest Impact Analysis
           </h2>
-          <div className="overflow-x-auto border border-[var(--color-border)]">
+          <div className="overflow-x-auto rounded-lg border border-[var(--color-border)]">
             <table className="w-full text-left">
               <thead>
                 <tr className="border-b border-[var(--color-border)] bg-[var(--color-bg-raised)]">
@@ -292,10 +292,10 @@ export default function StatsPage() {
 
         {/* Section 5: Country Comparison Matrix */}
         <section>
-          <h2 className="mb-4 text-sm font-semibold uppercase tracking-wider text-[var(--color-text-muted)] border-b border-[var(--color-border)] pb-2">
+          <h2 className="mb-6 text-[10px] font-[family-name:var(--font-mono)] uppercase tracking-widest text-[var(--color-text-muted)]">
             Country Comparison Matrix
           </h2>
-          <div className="overflow-x-auto border border-[var(--color-border)]">
+          <div className="overflow-x-auto rounded-lg border border-[var(--color-border)]">
             <table className="w-full text-left">
               <thead>
                 <tr className="border-b border-[var(--color-border)] bg-[var(--color-bg-raised)]">
@@ -383,14 +383,14 @@ export default function StatsPage() {
 
         {/* Section 6: Most Pressing Issues */}
         <section>
-          <h2 className="mb-4 text-sm font-semibold uppercase tracking-wider text-[var(--color-text-muted)] border-b border-[var(--color-border)] pb-2">
+          <h2 className="mb-6 text-[10px] font-[family-name:var(--font-mono)] uppercase tracking-widest text-[var(--color-text-muted)]">
             Most Pressing Issues
           </h2>
           <div className="space-y-3">
             {topIssues.map((issue) => (
               <div
                 key={issue.id}
-                className="border border-[var(--color-border)] bg-[var(--color-bg-raised)] p-4"
+                className="rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-raised)] p-4"
               >
                 <div className="flex items-start justify-between gap-4">
                   <div className="flex-1">
