@@ -18,6 +18,8 @@ const navLinks = [
   { href: "/protest-calc", label: "Protest Calc" },
   { href: "/search", label: "Search" },
   { href: "/learn", label: "Learn" },
+  { href: "/methodology", label: "Methodology" },
+  { href: "/glossary", label: "Glossary" },
   { href: "/about", label: "About" },
   { href: "/export", label: "Export" },
 ];

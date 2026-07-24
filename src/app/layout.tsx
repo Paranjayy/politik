@@ -76,6 +76,12 @@ export default function RootLayout({
               <a href="/learn" className="text-xs text-[var(--color-text-muted)] transition-colors hover:text-[var(--color-text)]">
                 Learn
               </a>
+              <a href="/methodology" className="text-xs text-[var(--color-text-muted)] transition-colors hover:text-[var(--color-text)]">
+                Method
+              </a>
+              <a href="/glossary" className="text-xs text-[var(--color-text-muted)] transition-colors hover:text-[var(--color-text)]">
+                Glossary
+              </a>
               <div className="h-3 w-px bg-[var(--color-border)]" />
               <a href="/export" className="text-xs text-[var(--color-text-muted)] transition-colors hover:text-[var(--color-text)]">
                 Export
