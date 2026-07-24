@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { KeyboardShortcuts } from "@/components/KeyboardShortcuts";
+import { MobileNav } from "@/components/MobileNav";
 
 export const metadata: Metadata = {
   title: "Politik - Civic Intelligence Platform",
@@ -28,7 +29,7 @@ export default function RootLayout({
                 v0.1
               </span>
             </a>
-            <div className="flex items-center gap-6">
+            <div className="hidden lg:flex items-center gap-6">
               <a href="/civic-ledger" className="text-xs text-[var(--color-text-muted)] transition-colors hover:text-[var(--color-text)]">
                 Issues
               </a>
@@ -49,6 +50,7 @@ export default function RootLayout({
                 Learn
               </a>
             </div>
+            <MobileNav />
           </div>
         </nav>
         <KeyboardShortcuts />
